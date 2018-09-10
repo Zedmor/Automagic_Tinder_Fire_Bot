@@ -25,9 +25,9 @@ def get_access_token(email, password):
 
 def get_login_credentials():
     print("Checking for credentials..")
-    if os.path.exists('auth.json'):
+    if os.path.exists('/home/zedmor/.config/fb.json'):
         print("Auth.json existed..")
-        with open('auth.json') as data_file:
+        with open('/home/zedmor/.config/fb.json') as data_file:
             data = json.load(data_file)
             if "email" in data and "password" in data and "FBID" in data:
                 return (data["email"], data["password"], data["FBID"])
