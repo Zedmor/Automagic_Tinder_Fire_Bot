@@ -23,13 +23,14 @@ class TinderAPI(object):
             return constants.API_BASE + url
 
     def auth(self, facebook_id, facebook_token):
-        data = {"facebook_id": str(facebook_id), "facebook_token": facebook_token}
+
+        data = {"token": facebook_token}
         result = self._session.post(
-            self._full_url('/auth'), json=data, proxies=self._proxies).json()
-        if 'token' not in result:
+            self._full_url('/v2/auth/login/facebook'), json=data, proxies=self._proxies).json()
+        if 'api_token' not in result['data']:
             raise errors.RequestError("Couldn't authenticate")
-        self._token = result['token']
-        self._session.headers.update({"X-Auth-Token": str(result['token'])})
+        self._token = result['data']['api_token']
+        self._session.headers.update({"X-Auth-Token": str(result['data']['api_token'])})
         return result
 
     def _request(self, method, url, data={}):
