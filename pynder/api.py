@@ -36,8 +36,14 @@ class TinderAPI(object):
     def _request(self, method, url, data={}):
         if not hasattr(self, '_token'):
             raise errors.InitializationError
+
+        kwargs = {}
+
+        if method != 'get':
+            kwargs.update({'json': data})
+
         result = self._session.request(method, self._full_url(
-            url), json=data, proxies=self._proxies)
+            url), proxies=self._proxies, **kwargs)
         while result.status_code == 429:
             blocker = threading.Event()
             blocker.wait(0.01)

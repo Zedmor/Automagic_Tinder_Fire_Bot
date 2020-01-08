@@ -6,11 +6,8 @@ CONTENT_BASE = 'https://content.gotinder.com'
 USER_AGENT = "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)"
 
 HEADERS = {
-    'app_version': '6.9.4',
-    'platform': 'ios',
-    "content-type": "application/json",
-    "User-agent": USER_AGENT,
-    "Accept": "application/json"
+    "Content-type": "application/json",
+    "User-agent": USER_AGENT
 }
 
 GENDER_MAP = ("male", "female")
